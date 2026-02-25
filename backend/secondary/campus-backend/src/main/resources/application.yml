@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: ${DATABASE_URL:jdbc:postgresql://kindlyfr:0KRCRal4YdOE3YKC8fOlv8xEi2NtdadY@dpg-d6eo0hrh46gs73e6n84g-a/cdb_oter}
+    url: ${DATABASE_URL:jdbc:postgresql://kindlyfr:0KRCRal4YdOE3YKC8fOlv8xEi2NtdadY@dpg-d6eo0hrh46gs73e6n84g-a.oregon-postgres.render.com:5432/cdb_oter?sslmode=require}
     username: ${DATABASE_USERNAME:kindlyfr}
     password: ${DATABASE_PASSWORD:0KRCRal4YdOE3YKC8fOlv8xEi2NtdadY}
     driver-class-name: org.postgresql.Driver
@@ -18,7 +18,7 @@ spring:
     show-sql: true
 
 server:
-  port: 8080
+  port: ${PORT:8080}
 
 
 

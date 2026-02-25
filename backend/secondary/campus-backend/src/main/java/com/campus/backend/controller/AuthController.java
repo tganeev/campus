@@ -28,6 +28,11 @@ public class AuthController {
     private final JwtService jwtService;
     private final UserService userService;
 
+    @GetMapping("/test")
+    public String test() {
+        return "Auth controller is alive!";
+    }
+
     @PostMapping("/login")
     @Operation(summary = "Вход в систему")
     public ResponseEntity<AuthResponseDTO> login(@Valid @RequestBody UserLoginDTO request) {
