@@ -1,5 +1,8 @@
 target/
-.git/
+.idea/
+*.log
+*.iml
 .env
-*.md
-.gitignore
+.git/
+README.md
+HELP.md
