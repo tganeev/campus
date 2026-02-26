@@ -33,6 +33,7 @@ public class SecurityConfig {
                         // Публичные эндпоинты (не требуют авторизации)
                         .requestMatchers(
                                 "/api/v1/auth/**",     // регистрация и логин
+                                "/api/v1/planning/schedules",
                                 "/ping",                // тестовый эндпоинт
                                 "/health",              // тестовый эндпоинт
                                 "/test",                 // тестовый эндпоинт
