@@ -1,6 +1,8 @@
 package com.campus.backend.repository;
 
 import com.campus.backend.model.User;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -23,4 +25,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
     List<User> findByClubId(@Param("clubId") Long clubId);
 
     boolean existsByEmail(String email);
+
+    @Query("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.clubs WHERE u.role = 'USER'")
+    Page<User> findAllPeersWithClubs(Pageable pageable);
 }
