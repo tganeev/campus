@@ -3,6 +3,7 @@
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/model/Presence.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/model/Club.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/model/PresenceStatus.java
+/opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/controller/TestController.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/model/Role.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/dto/PresenceUpdateDTO.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/service/PresenceService.java
@@ -15,10 +16,11 @@
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/model/PresencePlan.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/repository/ClubRepository.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/repository/PresenceRepository.java
-/opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/security/SecurityConfig.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/security/UserPrincipal.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/controller/PresenceController.java
+/opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/repository/PresencePlanRepository.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/model/User.java
+/opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/service/PlanningService.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/controller/UserController.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/exception/ResourceNotFoundException.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/dto/AuthResponseDTO.java
@@ -26,6 +28,8 @@
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/mapper/UserMapper.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/security/JwtAuthenticationFilter.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/dto/UserLoginDTO.java
+/opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/controller/PlanningController.java
+/opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/dto/PresencePlanDTO.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/CampusBackendApplication.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/repository/UserRepository.java
 /opt/goinfre/kindlyfr/campus/backend/secondary/campus-backend/src/main/java/com/campus/backend/security/JwtService.java
