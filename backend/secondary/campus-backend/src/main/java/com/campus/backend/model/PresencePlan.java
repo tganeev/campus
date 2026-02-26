@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
-
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 
@@ -23,12 +22,14 @@ public class PresencePlan {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.ORDINAL)  // <-- Добавьте эту аннотацию
+    @Column(name = "day_of_week")
     private DayOfWeek dayOfWeek;
 
     private LocalTime startTime;
 
     private LocalTime endTime;
 
+    @Column(name = "is_recurring")
     private boolean isRecurring = true;
 }
