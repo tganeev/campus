@@ -10,6 +10,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -46,7 +47,8 @@ public class PlanningService {
 
         PresencePlan plan = new PresencePlan();
         plan.setUser(user);
-        plan.setDayOfWeek(dto.getDayOfWeek());
+        // Преобразуем Integer в DayOfWeek (0 = ПН, 1 = ВТ, и т.д.)
+        plan.setDayOfWeek(convertIntToDayOfWeek(dto.getDayOfWeek()));
         plan.setStartTime(LocalTime.parse(dto.getStartTime()));
         plan.setEndTime(LocalTime.parse(dto.getEndTime()));
         plan.setRecurring(dto.getRecurring() != null ? dto.getRecurring() : true);
@@ -60,7 +62,7 @@ public class PlanningService {
         PresencePlan plan = planRepository.findById(planId)
                 .orElseThrow(() -> new ResourceNotFoundException("Plan not found with id: " + planId));
 
-        plan.setDayOfWeek(dto.getDayOfWeek());
+        plan.setDayOfWeek(convertIntToDayOfWeek(dto.getDayOfWeek()));
         plan.setStartTime(LocalTime.parse(dto.getStartTime()));
         plan.setEndTime(LocalTime.parse(dto.getEndTime()));
         plan.setRecurring(dto.getRecurring() != null ? dto.getRecurring() : plan.isRecurring());
@@ -82,10 +84,39 @@ public class PlanningService {
                 .id(plan.getId())
                 .userId(plan.getUser().getId())
                 .userName(plan.getUser().getName())
-                .dayOfWeek(plan.getDayOfWeek())
+                .dayOfWeek(convertDayOfWeekToInt(plan.getDayOfWeek()))
                 .startTime(plan.getStartTime().format(TIME_FORMATTER))
                 .endTime(plan.getEndTime().format(TIME_FORMATTER))
                 .recurring(plan.isRecurring())
                 .build();
+    }
+
+    // Вспомогательные методы для преобразования
+    private DayOfWeek convertIntToDayOfWeek(Integer day) {
+        if (day == null) return DayOfWeek.MONDAY;
+        switch (day) {
+            case 0: return DayOfWeek.MONDAY;
+            case 1: return DayOfWeek.TUESDAY;
+            case 2: return DayOfWeek.WEDNESDAY;
+            case 3: return DayOfWeek.THURSDAY;
+            case 4: return DayOfWeek.FRIDAY;
+            case 5: return DayOfWeek.SATURDAY;
+            case 6: return DayOfWeek.SUNDAY;
+            default: return DayOfWeek.MONDAY;
+        }
+    }
+
+    private Integer convertDayOfWeekToInt(DayOfWeek day) {
+        if (day == null) return 0;
+        switch (day) {
+            case MONDAY: return 0;
+            case TUESDAY: return 1;
+            case WEDNESDAY: return 2;
+            case THURSDAY: return 3;
+            case FRIDAY: return 4;
+            case SATURDAY: return 5;
+            case SUNDAY: return 6;
+            default: return 0;
+        }
     }
 }
