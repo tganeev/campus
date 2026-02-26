@@ -65,10 +65,14 @@ public class SecurityConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("*")  // для разработки можно "*"
-                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS")
+                        .allowedOrigins(
+                                "http://localhost:3000",
+                                "http://x9174365.beget.tech",
+                                "https://x9174365.beget.tech"
+                        )
+                        .allowedMethods("GET", "POST", "PUT", "DELETE", "OPTIONS", "PATCH")
                         .allowedHeaders("*")
-                        .allowCredentials(false);
+                        .allowCredentials(true);  // ВАЖНО: true для отправки токена
             }
         };
     }
