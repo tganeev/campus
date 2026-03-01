@@ -7,11 +7,13 @@ import com.campus.backend.repository.PresenceRepository;
 import org.mapstruct.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import lombok.extern.slf4j.Slf4j;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Mapper(componentModel = "spring", unmappedTargetPolicy = ReportingPolicy.IGNORE)
+@Slf4j
 public abstract class UserMapper {
 
     @Autowired
@@ -22,6 +24,7 @@ public abstract class UserMapper {
     @Mapping(target = "role", constant = "USER")
     @Mapping(target = "clubs", ignore = true)
     @Mapping(target = "presenceHistory", ignore = true)
+    @Mapping(target = "school21Login", source = "school21Login")  // Добавляем маппинг
     public abstract User toEntity(UserCreateDTO dto);
 
     @Mapping(target = "clubs", expression = "java(mapClubs(user))")
@@ -30,10 +33,15 @@ public abstract class UserMapper {
 
     protected List<String> mapClubs(User user) {
         if (user.getClubs() == null) {
+            log.debug("User {} has no clubs", user.getId());
             return List.of();
         }
+        log.debug("User {} has {} clubs", user.getId(), user.getClubs().size());
         return user.getClubs().stream()
-                .map(club -> club.getName())
+                .map(club -> {
+                    log.debug("  - Club: {} (id: {})", club.getName(), club.getId());
+                    return club.getName();
+                })
                 .collect(Collectors.toList());
     }
 

@@ -6,6 +6,7 @@ import lombok.NoArgsConstructor;
 import lombok.AllArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.time.LocalDateTime;
 import java.util.HashSet;
@@ -28,10 +29,14 @@ public class User {
     @Column(unique = true)
     private String telegramNick;
 
-    @Column(unique = true)
+    @Column(unique = true, nullable = true)  // Делаем email необязательным
     private String email;
 
+    @Column(nullable = true)  // Разрешаем NULL для пароля
     private String password;
+
+    @Column(unique = true, nullable = false)  // Новое поле для School21 логина
+    private String school21Login;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
@@ -54,5 +59,6 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "club_id")
     )
+    @JsonIgnoreProperties("members")
     private Set<Club> clubs = new HashSet<>();
 }

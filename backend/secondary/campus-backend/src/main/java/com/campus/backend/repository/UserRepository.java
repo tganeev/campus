@@ -18,6 +18,8 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     Optional<User> findByTelegramNick(String telegramNick);
 
+    Optional<User> findBySchool21Login(String school21Login);  // Новый метод
+
     @Query("SELECT u FROM User u WHERE u.role = 'USER'")
     List<User> findAllPeers();
 
@@ -26,6 +28,12 @@ public interface UserRepository extends JpaRepository<User, Long> {
 
     boolean existsByEmail(String email);
 
+    boolean existsBySchool21Login(String school21Login);  // Новый метод
+
     @Query("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.clubs WHERE u.role = 'USER'")
     Page<User> findAllPeersWithClubs(Pageable pageable);
+
+    @Query("SELECT DISTINCT u FROM User u LEFT JOIN FETCH u.clubs WHERE u.role = 'USER'")
+    List<User> findAllPeersWithClubsOptimized();
+
 }
