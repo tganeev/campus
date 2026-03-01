@@ -128,6 +128,11 @@
             <optional>true</optional>
         </dependency>
 
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
         <!-- Тестирование -->
         <dependency>
             <groupId>org.springframework.boot</groupId>
