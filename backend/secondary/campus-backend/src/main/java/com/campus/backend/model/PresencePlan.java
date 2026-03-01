@@ -22,12 +22,15 @@ public class PresencePlan {
     @JoinColumn(name = "user_id", nullable = false)
     private User user;
 
-    @Enumerated(EnumType.ORDINAL)  // <-- Добавьте эту аннотацию
+    // Изменяем аннотацию для правильного преобразования
+    @Enumerated(EnumType.STRING)  // Сохраняем как строку (MONDAY, TUESDAY...)
     @Column(name = "day_of_week")
     private DayOfWeek dayOfWeek;
 
+    @Column(name = "start_time")
     private LocalTime startTime;
 
+    @Column(name = "end_time")
     private LocalTime endTime;
 
     @Column(name = "is_recurring")
