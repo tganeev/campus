@@ -26,29 +26,30 @@ public class User {
     @Column(nullable = false)
     private String name;
 
-    @Column(unique = true)
-    private String telegramNick;
-
-    @Column(unique = true, nullable = true)  // Делаем email необязательным
+    @Column(unique = true, nullable = true)
     private String email;
 
-    @Column(nullable = true)  // Разрешаем NULL для пароля
+    @Column(nullable = true)
     private String password;
 
-    @Column(unique = true, nullable = false)  // Новое поле для School21 логина
-    private String school21Login;
+    @Column(name = "telegram_nick", unique = true)
+    private String telegramNick;
+
+    @Column(name = "avatar_url")
+    private String avatarUrl;
 
     @Enumerated(EnumType.STRING)
     private Role role = Role.USER;
 
-    private String avatarUrl;
-
-    @CreationTimestamp
-    @Column(updatable = false)
+    @Column(name = "created_at", updatable = false)
     private LocalDateTime createdAt;
 
-    @UpdateTimestamp
+    @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    // ВАЖНО: явно указываем имя колонки
+    @Column(name = "school21_login", unique = true, nullable = false)
+    private String school21Login;
 
     @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
     private Set<Presence> presenceHistory = new HashSet<>();
@@ -59,6 +60,5 @@ public class User {
             joinColumns = @JoinColumn(name = "user_id"),
             inverseJoinColumns = @JoinColumn(name = "club_id")
     )
-    @JsonIgnoreProperties("members")
     private Set<Club> clubs = new HashSet<>();
 }

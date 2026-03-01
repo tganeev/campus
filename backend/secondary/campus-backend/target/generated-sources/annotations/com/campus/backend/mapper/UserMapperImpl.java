@@ -9,7 +9,7 @@ import org.springframework.stereotype.Component;
 
 @Generated(
     value = "org.mapstruct.ap.MappingProcessor",
-    date = "2026-03-01T21:18:58+0500",
+    date = "2026-03-01T21:28:52+0500",
     comments = "version: 1.5.5.Final, compiler: javac, environment: Java 21.0.6 (Oracle Corporation)"
 )
 @Component
@@ -25,8 +25,8 @@ public class UserMapperImpl extends UserMapper {
 
         user.setSchool21Login( dto.getSchool21Login() );
         user.setName( dto.getName() );
-        user.setTelegramNick( dto.getTelegramNick() );
         user.setEmail( dto.getEmail() );
+        user.setTelegramNick( dto.getTelegramNick() );
 
         user.setRole( Role.USER );
 
