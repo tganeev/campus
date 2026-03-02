@@ -3,10 +3,7 @@ package com.campus.backend.client;
 import com.campus.backend.dto.school21.ParticipantV1DTO;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
 
@@ -19,24 +16,25 @@ public class School21Client {
     private final String apiKey;
 
     public School21Client(
-            @Value("${school21.api.base-url}") String baseUrl,
-            @Value("${school21.api.api-key}") String apiKey) {
+            @Value("${school21.api.base-url:https://platform.21-school.ru/services/21-school/api}") String baseUrl,
+            @Value("${school21.api.api-key:default-key}") String apiKey) {
 
+        this.restTemplate = new RestTemplate();
         this.baseUrl = baseUrl;
         this.apiKey = apiKey;
-        this.restTemplate = new RestTemplate();
 
-        log.info("School21Client initialized with baseUrl: {}", baseUrl);
-        log.info("API Key provided: {}", apiKey != null && !apiKey.isEmpty() ? "YES" : "NO");
+        log.info("School21Client initialized");
+        log.info("Base URL: {}", baseUrl);
+        log.info("API Key exists: {}", apiKey != null && !apiKey.isEmpty() && !apiKey.equals("default-key"));
     }
 
     public ParticipantV1DTO getParticipantByLogin(String login) {
-        log.info("Fetching participant info from School21 for login: {}", login);
+        log.info("Getting participant info for login: {}", login);
 
         try {
             HttpHeaders headers = new HttpHeaders();
             headers.set("Authorization", apiKey);
-            headers.set("Content-Type", "application/json");
+            headers.setContentType(MediaType.APPLICATION_JSON);
 
             HttpEntity<String> entity = new HttpEntity<>(headers);
 
@@ -49,14 +47,21 @@ public class School21Client {
                     ParticipantV1DTO.class
             );
 
+            log.info("Successfully got participant: {}", login);
             return response.getBody();
 
         } catch (Exception e) {
-            log.error("Failed to fetch participant {} from School21: {}", login, e.getMessage());
-            // Для разработки возвращаем мок-данные
-            ParticipantV1DTO mock = new ParticipantV1DTO();
-            mock.setLogin(login);
-            return mock;
+            log.warn("Failed to get participant from School21 API: {}", e.getMessage());
+            log.info("Returning mock participant for login: {}", login);
+
+            // Возвращаем мок-данные для разработки
+            return createMockParticipant(login);
         }
+    }
+
+    private ParticipantV1DTO createMockParticipant(String login) {
+        ParticipantV1DTO mock = new ParticipantV1DTO();
+        mock.setLogin(login);
+        return mock;
     }
 }

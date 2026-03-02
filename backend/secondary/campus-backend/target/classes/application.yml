@@ -24,7 +24,7 @@ server:
     api:
       base-url: https://platform.21-school.ru/services/21-school/api
       # !!! ВАЖНО: Никогда не храните ключи в коде. Используйте переменные окружения.
-      api-key: ${SCHOOL21_API_KEY:your-default-key-for-dev}
+      api-key: "${SCHOOL21_API_KEY:default-key}"
     # Доп. настройки, если нужны
     client:
       connect-timeout: 5000
